@@ -3,10 +3,6 @@
 #' @param batchID integer largest batchID already obtained.
 #' Default: 0, meaning none.
 #'
-#' @param includeTesting logical scalar; default: FALSE. If TRUE,
-#' return testing batches as well as normal batches, but only
-#' if user is an administrator.  Testing batches are not real data!
-#'
 #' @return data.frame with these columns:
 #' \itemize{
 #' \item batchID integer motus batch ID
@@ -27,6 +23,6 @@
 #' @author John Brzustowski \email{jbrzusto@@REMOVE_THIS_PART_fastmail.fm}
 
 srvBatchesForAll = function(batchID=0, includeTesting=FALSE) {
-    x = srvQuery(API=Motus$API_BATCHES_FOR_ALL, params=list(batchID=batchID, includeTesting=includeTesting))
+    x = srvQuery(API=Motus$API_BATCHES_FOR_ALL, params=list(batchID=batchID, includeTesting=Motus$includeTesting))
     return (structure(x, class = "data.frame", row.names=seq(along=x[[1]])))
 }

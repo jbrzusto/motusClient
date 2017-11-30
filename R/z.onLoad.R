@@ -132,6 +132,7 @@
     ## Add additional variables
     sessionVariable("authToken", srvAuth)
     sessionVariable("dataServerURL", "URL of data server", val=dataServerURL)  ## FIXME: switch to wrapper URL once implemented
+    sessionVariable("includeTesting", "Whether to retrieve testing batches (only works for admin users)", val=FALSE)
 
     with(Motus,
     {
