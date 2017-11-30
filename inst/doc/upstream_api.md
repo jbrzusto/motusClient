@@ -20,6 +20,8 @@ it is to work with this package.
 - **metadata:** [for tags](#metadata-for-tags); [for receivers](#metadata-for-receivers)
 - **ambiguities:** [among tags](#tags-for-ambiguities); [among projects](#project-ambiguities-for-tag-project)
 
+[**Changelog**](#Changelog)
+
 ## API summary ##
 
 ### Request ###
@@ -180,6 +182,10 @@ These assumptions allow for simpler, more efficient database queries.
        - projectID: integer; project ID
        - batchID: integer; largest batchID we already have for this project
        - authToken: authorization token returned by authenticate_user
+       - includeTesting: boolean; default: false.  If true, include those batches marked
+         `testing` on the server.  This parameter is ignored for non-administrator users.
+         **Do not use** this parameter unless you are prepared to correct your database to
+         remove such batches!
 
       e.g.
       curl --data-urlencode json='{"projectID":123,"batchID":0, "authToken":"XXX"}' https://sgdata.motus.org/data/custom/batches_for_tag_project
@@ -211,6 +217,10 @@ returns an empty list.
        - deviceID: integer; motus device ID, e.g. as returned by receivers_for_project
        - batchID: integer; largest batchID we already have for this project
        - authToken: authorization token returned by authenticate_user
+       - includeTesting: boolean; default: false.  If true, include those batches marked
+         `testing` on the server.  This parameter is ignored for non-administrator users.
+         **Do not use** this parameter unless you are prepared to correct your database to
+         remove such batches!
 
       e.g.
       curl --data-urlencode json='{"projectID":123,"batchID":0, "authToken":"XXX"}' https://sgdata.motus.org/data/custom/batches_for_receiver
@@ -240,6 +250,10 @@ returns an empty list.
 
        - batchID: integer; largest batchID we already have
        - authToken: authorization token returned by authenticate_user
+       - includeTesting: boolean; default: false.  If true, include those batches marked
+         `testing` on the server.  This parameter is ignored for non-administrator users.
+         **Do not use** this parameter unless you are prepared to correct your database to
+         remove such batches!
 
       e.g.
       curl --data-urlencode json='{"batchID":0, "authToken":"XXX"}' https://sgdata.motus.org/data/custom/batches_for_all
@@ -733,3 +747,19 @@ the project which owns the receiver deployment covering this batch.
 
 For admin users, *all* pulse counts are returned, regardless of batch ownership
 (or lack thereof).
+
+## Changelog ##
+
+2017-11-30: added the `includeTesting` boolean parameter to `batch_for_*`
+  entries.  This parameter defaults to `false`.  If `true` and the user
+  is an administrator, then records for batches marked as `testing` on
+  the server are returned as if they were normal batches.  Otherwise,
+  `testing` batches are not returned.  This is intended to help debug
+  server-side code by allowing batches of data to be processed and
+  their results made available "under the radar".  This parameter
+  should never be set to `true` when requesting data for end users:
+  any data associated with `testing` batches can be deleted from the
+  sgdata.motus.org server at any time, and should be considered *invalid*.
+
+  It is guaranteed that batchIDs, runIDs, and hitIDs from testing
+  batches **will not be re-used** for production batches.

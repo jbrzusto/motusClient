@@ -4,11 +4,15 @@
 \alias{srvBatchesForAll}
 \title{get new batches for all receivers from the data server}
 \usage{
-srvBatchesForAll(batchID = 0)
+srvBatchesForAll(batchID = 0, includeTesting = FALSE)
 }
 \arguments{
 \item{batchID}{integer largest batchID already obtained.
 Default: 0, meaning none.}
+
+\item{includeTesting}{logical scalar; default: FALSE. If TRUE,
+return testing batches as well as normal batches, but only
+if user is an administrator.  Testing batches are not real data!}
 }
 \value{
 data.frame with these columns:

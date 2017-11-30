@@ -4,13 +4,17 @@
 \alias{srvBatchesForReceiver}
 \title{get the batches for a receiver from the data server}
 \usage{
-srvBatchesForReceiver(deviceID, batchID = 0)
+srvBatchesForReceiver(deviceID, batchID = 0, includeTesting = FALSE)
 }
 \arguments{
 \item{deviceID}{integer scalar motus device ID}
 
 \item{batchID}{integer largest batchID already owned for this project.
 Default: 0, meaning none.}
+
+\item{includeTesting}{logical scalar; default: FALSE. If TRUE,
+return testing batches as well as normal batches, but only
+if user is an administrator.  Testing batches are not real data!}
 }
 \value{
 data.frame with these columns:

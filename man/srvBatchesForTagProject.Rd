@@ -4,13 +4,17 @@
 \alias{srvBatchesForTagProject}
 \title{get the batches for a tag project from the data server}
 \usage{
-srvBatchesForTagProject(projectID, batchID = 0)
+srvBatchesForTagProject(projectID, batchID = 0, includeTesting = FALSE)
 }
 \arguments{
 \item{projectID}{integer scalar motus project ID}
 
 \item{batchID}{integer largest batchID already owned for this project.
 Default: 0, meaning none.}
+
+\item{includeTesting}{logical scalar; default: FALSE. If TRUE,
+return testing batches as well as normal batches, but only
+if user is an administrator.  Testing batches are not real data!}
 }
 \value{
 data.frame with these columns:
