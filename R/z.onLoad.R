@@ -45,9 +45,11 @@
 #' @author John Brzustowski \email{jbrzusto@@REMOVE_THIS_PART_fastmail.fm}
 
 .onLoad = function(...) {
-    ## interim location of unprotected local data server
+    ## default location of motus data server, unless user has already assigned a value
+    ## to "dataServerURL" in the global environment.
 
-    dataServerURL = "https://sgdata.motus.org/data"
+    if (! exists("dataServerURL"))
+        dataServerURL = "https://sgdata.motus.org/data"
 
     ## Assign constants
 
