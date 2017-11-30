@@ -13,6 +13,9 @@ This is an environment that holds constants (whose bindings are locked)
 and session variables (not locked) used by this package.
 }
 \details{
+For full definitions, see the \code{\link{.onLoad}} function in this package
+(file \code{z.onLoad.R}).
+
 Constants are:
 
 \describe{
