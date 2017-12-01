@@ -182,7 +182,7 @@ These assumptions allow for simpler, more efficient database queries.
        - projectID: integer; project ID
        - batchID: integer; largest batchID we already have for this project
        - authToken: authorization token returned by authenticate_user
-       - includeTesting: boolean; default: false.  If true, include those batches marked
+       - includeTesting: (optional) boolean; default: false.  If true, include those batches marked
          `testing` on the server.  This parameter is ignored for non-administrator users.
          **Do not use** this parameter unless you are prepared to correct your database to
          remove such batches!
@@ -217,7 +217,7 @@ returns an empty list.
        - deviceID: integer; motus device ID, e.g. as returned by receivers_for_project
        - batchID: integer; largest batchID we already have for this project
        - authToken: authorization token returned by authenticate_user
-       - includeTesting: boolean; default: false.  If true, include those batches marked
+       - includeTesting: (optional) boolean; default: false.  If true, include those batches marked
          `testing` on the server.  This parameter is ignored for non-administrator users.
          **Do not use** this parameter unless you are prepared to correct your database to
          remove such batches!
@@ -250,7 +250,7 @@ returns an empty list.
 
        - batchID: integer; largest batchID we already have
        - authToken: authorization token returned by authenticate_user
-       - includeTesting: boolean; default: false.  If true, include those batches marked
+       - includeTesting: (optional) boolean; default: false.  If true, include those batches marked
          `testing` on the server.  This parameter is ignored for non-administrator users.
          **Do not use** this parameter unless you are prepared to correct your database to
          remove such batches!
@@ -750,7 +750,7 @@ For admin users, *all* pulse counts are returned, regardless of batch ownership
 
 ## Changelog ##
 
-2017-11-30: added the `includeTesting` boolean parameter to `batch_for_*`
+2017-11-30: added the optional `includeTesting` boolean parameter to `batch_for_*`
   entries.  This parameter defaults to `false`.  If `true` and the user
   is an administrator, then records for batches marked as `testing` on
   the server are returned as if they were normal batches.  Otherwise,
@@ -763,3 +763,6 @@ For admin users, *all* pulse counts are returned, regardless of batch ownership
 
   It is guaranteed that batchIDs, runIDs, and hitIDs from testing
   batches **will not be re-used** for production batches.
+
+  This change does not require any change on the client side unless
+  the client wishes to obtain testing batches.
