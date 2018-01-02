@@ -20,7 +20,7 @@ it is to work with this package.
 - **metadata:** [for tags](#metadata-for-tags); [for receivers](#metadata-for-receivers)
 - **ambiguities:** [among tags](#tags-for-ambiguities); [among projects](#project-ambiguities-for-tag-project)
 
-[**Changelog**](#Changelog)
+[**Changelog**](#changelog)
 
 ## API summary ##
 
