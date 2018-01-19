@@ -69,7 +69,7 @@ The server is at [https://sgdata.motus.org](https://sgdata.motus.org) and the UR
 
 ### api info ###
 
-   api_info (authToken)
+   api_info ()
 
    - return an object with these items:
 
@@ -138,6 +138,7 @@ These assumptions allow for simpler, more efficient database queries.
    deviceID_for_receiver (serno, authToken)
 
        - serno: array of string; receiver serial number(s)
+       - authToken: authorization token returned by authenticate_user
 
       e.g.
       curl --data-urlencode json='{"serno":"SG-1234BBBK5678","authToken":"XXX"}' https://sgdata.motus.org/data/custom/deviceID_for_receiver
@@ -153,6 +154,7 @@ These assumptions allow for simpler, more efficient database queries.
    receivers_for_project (projectID, authToken)
 
        - projectID: integer; project ID
+       - authToken: authorization token returned by authenticate_user
 
       e.g.
       curl --data-urlencode json='{"projectID":123,"authToken":"XXX"}' https://sgdata.motus.org/data/custom/receivers_for_project
@@ -177,15 +179,15 @@ These assumptions allow for simpler, more efficient database queries.
 
 ### batches for tag project ###
 
-   batches_for_tag_project (projectID, batchID, authToken)
+   batches_for_tag_project (projectID, batchID, includeTesting, authToken)
 
        - projectID: integer; project ID
        - batchID: integer; largest batchID we already have for this project
-       - authToken: authorization token returned by authenticate_user
        - includeTesting: (optional) boolean; default: false.  If true, include those batches marked
          `testing` on the server.  This parameter is ignored for non-administrator users.
          **Do not use** this parameter unless you are prepared to correct your database to
          remove such batches!
+       - authToken: authorization token returned by authenticate_user
 
       e.g.
       curl --data-urlencode json='{"projectID":123,"batchID":0, "authToken":"XXX"}' https://sgdata.motus.org/data/custom/batches_for_tag_project
@@ -212,15 +214,15 @@ returns an empty list.
 
 ### batches for receiver ###
 
-   batches_for_receiver (deviceID, batchID, authToken)
+   batches_for_receiver (deviceID, batchID, includeTesting, authToken)
 
        - deviceID: integer; motus device ID, e.g. as returned by receivers_for_project
        - batchID: integer; largest batchID we already have for this project
-       - authToken: authorization token returned by authenticate_user
        - includeTesting: (optional) boolean; default: false.  If true, include those batches marked
          `testing` on the server.  This parameter is ignored for non-administrator users.
          **Do not use** this parameter unless you are prepared to correct your database to
          remove such batches!
+       - authToken: authorization token returned by authenticate_user
 
       e.g.
       curl --data-urlencode json='{"projectID":123,"batchID":0, "authToken":"XXX"}' https://sgdata.motus.org/data/custom/batches_for_receiver
@@ -246,14 +248,14 @@ returns an empty list.
 
 ### batches for all ###
 
-   batches_for_all (batchID, authToken) - administrative users only
+   batches_for_all (batchID, includeTesting, authToken) - administrative users only
 
        - batchID: integer; largest batchID we already have
-       - authToken: authorization token returned by authenticate_user
        - includeTesting: (optional) boolean; default: false.  If true, include those batches marked
          `testing` on the server.  This parameter is ignored for non-administrator users.
          **Do not use** this parameter unless you are prepared to correct your database to
          remove such batches!
+       - authToken: authorization token returned by authenticate_user
 
       e.g.
       curl --data-urlencode json='{"batchID":0, "authToken":"XXX"}' https://sgdata.motus.org/data/custom/batches_for_all
@@ -635,6 +637,7 @@ For admin users, *all* gps records are returned, regardless of batch ownership
 
        - projectID: integer; project ID
        - batchID: integer; ID of largest batch client already has
+       - authToken: authorization token returned by authenticate_user
 
       e.g.
       curl --data-urlencode json='{"projectID":123,"batchID":15538,"authToken":"XXX"}' https://sgdata.motus.org/data/custom/size_of_update_for_tag_project
@@ -652,6 +655,7 @@ For admin users, *all* gps records are returned, regardless of batch ownership
 
        - deviceID: integer; motus device ID
        - batchID: integer; ID of largest batch client already has
+       - authToken: authorization token returned by authenticate_user
 
       e.g.
       curl --data-urlencode json='{"deviceID":221,"batchID":15538,"authToken":"XXX"}' https://sgdata.motus.org/data/custom/size_of_update_for_receiver
