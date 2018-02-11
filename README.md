@@ -1,8 +1,9 @@
 # motus
 R package to fetch telemetry data from http://motus.org
 
-Core client for the `motus` package; most users should use the motus R package provided by motus.org,
-which uses `motusClient` to fetch data.
+Core client for the `motus` package; most users should use the `motus` R package provided by motus.org, which is here:  https://github.com/MotusWTS/motus.
+That package uses a fork of this one to fetch data, but also provides functions
+to work with the data.
 
 ## Installation ##
 ```R
