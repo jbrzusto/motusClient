@@ -287,7 +287,7 @@ detections.  Currently, that means only administrative users.
 
        - projectID: integer; project ID
        - batchID: integer; batch ID
-       - runID: integer; largest run ID we *already* have from this batch and tag project
+       - runID: double; largest run ID we *already* have from this batch and tag project
        - authToken: authorization token returned by authenticate_user
 
       e.g.
@@ -297,7 +297,7 @@ detections.  Currently, that means only administrative users.
      were extended or ended in batch `batchID`, and with run ID > `runID`
 
    - fields in the returned object are arrays:
-      - runID: big integer; unique ID of run
+      - runID: double; unique ID of run
       - batchIDbegin: integer; id of batch in which run began
       - tsBegin: double; unix timestamp of first detection in run
       - tsEnd: double; unix timestamp of last detection in run (*so far*, if `done` is 0)
@@ -321,7 +321,7 @@ fields could change if the run were extended or known to have ended.
    runs_for_receiver (batchID, runID, authToken)
 
        - batchID: integer; batch ID
-       - runID: integer; largest runID we *already* have from this batch
+       - runID: double; largest runID we *already* have from this batch
        - authToken: authorization token returned by authenticate_user
 
       e.g.
@@ -330,7 +330,7 @@ fields could change if the run were extended or known to have ended.
    - return a list of all runs begun, extended, or ended in batch `batchID` with run ID > `runID`
 
    - fields in the returned object are arrays:
-      - runID: big integer; unique ID of run
+      - runID: double; unique ID of run
       - batchIDbegin: integer; id of batch in which run began
       - tsBegin: double; unix timestamp of first detection in run
       - tsEnd: double; unix timestamp of last detection in run (*so far*, if `done` is 0)
@@ -361,7 +361,7 @@ fields could change if the run were extended or known to have ended.
 
        - projectID: integer; project ID
        - batchID: integer; batchID
-       - hitID: integer; largest hitID we *already* have from this batch
+       - hitID: double; largest hitID we *already* have from this batch
        - authToken: authorization token returned by authenticate_user
 
       e.g.
@@ -392,7 +392,7 @@ returns an empty list.
    hits_for_receiver (batchID, hitID, authToken)
 
        - batchID: integer; batchID
-       - hitID: integer; largest hitID we *already* have from this batch
+       - hitID: double; largest hitID we *already* have from this batch
        - authToken: authorization token returned by authenticate_user
 
       e.g.
@@ -753,6 +753,11 @@ For admin users, *all* pulse counts are returned, regardless of batch ownership
 (or lack thereof).
 
 ## Changelog ##
+
+2018-02-16: change types of `runID` and `hitID` to `double` to accomodate more
+than 2 billion of each.  We are already at 30% of 2 billion for hits, and given
+the reprocessing contract stipulates we never re-use `hitID`, an integer value
+doesn't afford much room for growth.
 
 2017-11-30: added the optional `includeTesting` boolean parameter to `batch_for_*`
   entries.  This parameter defaults to `false`.  If `true` and the user

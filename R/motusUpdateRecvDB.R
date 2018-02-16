@@ -82,7 +82,7 @@ motusUpdateRecvDB = function(src, countOnly, forceMeta=FALSE) {
             ## this batch's record).
             ## ----------------------------------------------------------------------------
 
-            hitID = sql("select ifnull(max(hitID), 0) from hits where batchID=%d", batchID)[[1]]
+            hitID = sql("select cast(ifnull(max(hitID), 0) as numeric) from hits where batchID=%d", batchID)[[1]]
             repeat {
                 h = srvHitsForReceiver(batchID=batchID, hitID=hitID)
                 if (! isTRUE(nrow(h) > 0))

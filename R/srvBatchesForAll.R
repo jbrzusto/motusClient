@@ -22,7 +22,7 @@
 #'
 #' @author John Brzustowski \email{jbrzusto@@REMOVE_THIS_PART_fastmail.fm}
 
-srvBatchesForAll = function(batchID=0, includeTesting=FALSE) {
+srvBatchesForAll = function(batchID=0) {
     x = srvQuery(API=Motus$API_BATCHES_FOR_ALL, params=list(batchID=batchID, includeTesting=Motus$includeTesting))
     return (structure(x, class = "data.frame", row.names=seq(along=x[[1]])))
 }

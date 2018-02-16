@@ -4,7 +4,7 @@
 \alias{srvBatchesForAll}
 \title{get new batches for all receivers from the data server}
 \usage{
-srvBatchesForAll(batchID = 0, includeTesting = FALSE)
+srvBatchesForAll(batchID = 0)
 }
 \arguments{
 \item{batchID}{integer largest batchID already obtained.

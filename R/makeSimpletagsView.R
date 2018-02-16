@@ -50,7 +50,7 @@
 makeSimpletagsView = function(db, name="simpletags") {
     query = paste0("create view ", name, " as
 select
-   t1.hitID,
+   cast(t1.hitID as numeric) as hitID,
    t2.motusTagID,
    t4.mfgID,
    t5.fullID,
@@ -62,7 +62,7 @@ select
    t1.freqSD,
    t1.slop,
    t1.burstSlop,
-   t1.runID,
+   cast(t1.runID as numeric) as runID,
    t2.ant,
    t2.len as runLen,
    t3.motusDeviceID,

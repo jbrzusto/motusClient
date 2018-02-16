@@ -12,8 +12,8 @@
 #' @return a dplyr::tbl which refers to the newly-created virtual table.
 #' By default, the columns in the virtual table are:
 #' \itemize{
-#'    \item{hitID} unique motus ID for this tag detection
-#'    \item{runID} unique motus ID for the run this detection belongs to
+#'    \item{hitID} (double) unique motus ID for this tag detection
+#'    \item{runID} (double) unique motus ID for the run this detection belongs to
 #'    \item{batchID} unique motus ID for the processing batch this detection came from
 #'    \item{ts} timestamp, in seconds since 1 Jan, 1970 GMT
 #'    \item{sig} signal strength, in dB (max) for SG; raw value for Lotek receiver
@@ -112,8 +112,8 @@
 makeAlltagsView = function(db, name="alltags") {
     query = paste0("CREATE VIEW ", name, " AS
 SELECT
-   t1.hitID as hitID,
-   t1.runID as runID,
+   cast(t1.hitID as double) as hitID,
+   cast(t1.runID as double) as runID,
    t1.batchID as batchID,
    t1.ts as ts,
    t1.sig as sig,

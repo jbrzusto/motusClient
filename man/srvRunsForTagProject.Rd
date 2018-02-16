@@ -11,20 +11,20 @@ srvRunsForTagProject(projectID, batchID, runID = 0)
 
 \item{batchID}{integer scalar motus batch ID}
 
-\item{runID}{integer scalar ID of latest run already obtained.
+\item{runID}{double scalar ID of latest run already obtained.
 Default: 0, meaning none.}
 }
 \value{
 a data.frame with these columns:
 \itemize{
-   \item runID
+   \item (double) runID
    \item batchIDbegin
-   \item tsBegin
-   \item tsEnd
-   \item done
-   \item motusTagID
-   \item ant
-   \item len
+   \item (double) tsBegin
+   \item (double) tsEnd
+   \item (integer) done
+   \item (integer) motusTagID
+   \item (integer) ant
+   \item (integer) len
 }
 }
 \description{

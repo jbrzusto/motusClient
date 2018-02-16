@@ -9,23 +9,23 @@ srvHitsForReceiver(batchID, hitID = 0)
 \arguments{
 \item{batchID}{integer scalar motus batch ID}
 
-\item{hitID}{integer scalar ID of latest hit already obtained.
+\item{hitID}{double scalar ID of latest hit already obtained.
 Default: 0, meaning none.}
 }
 \value{
 data.frame with these columns:
 \itemize{
-  \item hitID
-  \item runID
-  \item batchID
-  \item ts
-  \item sig
-  \item sigSD
-  \item noise
-  \item freq
-  \item freqSD
-  \item slop
-  \item burstSlop
+  \item (double) hitID
+  \item (double) runID
+  \item (integer) batchID
+  \item (double) ts
+  \item (double) sig
+  \item (double) sigSD
+  \item (double) noise
+  \item (double) freq
+  \item (double) freqSD
+  \item (double) slop
+  \item (double) burstSlop
 }
 }
 \description{
